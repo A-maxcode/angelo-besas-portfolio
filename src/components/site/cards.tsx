@@ -1,4 +1,4 @@
-import { Award, Calendar, ExternalLink, FileText, Github, ImageIcon, Lock } from "lucide-react";
+import { Award, Calendar, ExternalLink, FileText, ImageIcon, Lock, type LucideIcon } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import type { Achievement, Certificate, Project, SkillGroup } from "@/data/types";
 import { StatusBadge } from "./StatusBadge";
@@ -55,7 +55,7 @@ export function CertificateCard({ item }: { item: Certificate }) {
   );
 }
 
-function PlaceholderLink({ icon: Icon, label }: { icon: typeof Github; label: string }) {
+function PlaceholderLink({ icon: Icon, label }: { icon: LucideIcon; label: string }) {
   return (
     <span
       className="inline-flex items-center gap-1.5 rounded-md border border-dashed px-2.5 py-1.5 text-xs text-muted-foreground"
