@@ -18,6 +18,14 @@ import { Route as ContactRouteImport } from './routes/contact'
 import { Route as ProjectsRouteImport } from './routes/projects'
 import { Route as SkillsRouteImport } from './routes/skills'
 import { Route as AdminIndexRouteImport } from './routes/admin.index'
+import { Route as AdminAchievementsRouteImport } from './routes/admin.achievements'
+import { Route as AdminCertificatesRouteImport } from './routes/admin.certificates'
+import { Route as AdminEducationRouteImport } from './routes/admin.education'
+import { Route as AdminMessagesRouteImport } from './routes/admin.messages'
+import { Route as AdminProfileRouteImport } from './routes/admin.profile'
+import { Route as AdminProjectsRouteImport } from './routes/admin.projects'
+import { Route as AdminSettingsRouteImport } from './routes/admin.settings'
+import { Route as AdminSkillsRouteImport } from './routes/admin.skills'
 import { Route as AdminLoginRouteImport } from './routes/admin_.login'
 
 const IndexRoute = IndexRouteImport.update({
@@ -65,6 +73,46 @@ const AdminIndexRoute = AdminIndexRouteImport.update({
   path: '/',
   getParentRoute: () => AdminRoute,
 } as any)
+const AdminAchievementsRoute = AdminAchievementsRouteImport.update({
+  id: '/achievements',
+  path: '/achievements',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminCertificatesRoute = AdminCertificatesRouteImport.update({
+  id: '/certificates',
+  path: '/certificates',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminEducationRoute = AdminEducationRouteImport.update({
+  id: '/education',
+  path: '/education',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminMessagesRoute = AdminMessagesRouteImport.update({
+  id: '/messages',
+  path: '/messages',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminProfileRoute = AdminProfileRouteImport.update({
+  id: '/profile',
+  path: '/profile',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminProjectsRoute = AdminProjectsRouteImport.update({
+  id: '/projects',
+  path: '/projects',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminSettingsRoute = AdminSettingsRouteImport.update({
+  id: '/settings',
+  path: '/settings',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminSkillsRoute = AdminSkillsRouteImport.update({
+  id: '/skills',
+  path: '/skills',
+  getParentRoute: () => AdminRoute,
+} as any)
 const AdminLoginRoute = AdminLoginRouteImport.update({
   id: '/admin_/login',
   path: '/admin/login',
@@ -80,6 +128,14 @@ export interface FileRoutesByFullPath {
   '/contact': typeof ContactRoute
   '/projects': typeof ProjectsRoute
   '/skills': typeof SkillsRoute
+  '/admin/achievements': typeof AdminAchievementsRoute
+  '/admin/certificates': typeof AdminCertificatesRoute
+  '/admin/education': typeof AdminEducationRoute
+  '/admin/messages': typeof AdminMessagesRoute
+  '/admin/profile': typeof AdminProfileRoute
+  '/admin/projects': typeof AdminProjectsRoute
+  '/admin/settings': typeof AdminSettingsRoute
+  '/admin/skills': typeof AdminSkillsRoute
   '/admin/login': typeof AdminLoginRoute
   '/admin/': typeof AdminIndexRoute
 }
@@ -91,6 +147,14 @@ export interface FileRoutesByTo {
   '/contact': typeof ContactRoute
   '/projects': typeof ProjectsRoute
   '/skills': typeof SkillsRoute
+  '/admin/achievements': typeof AdminAchievementsRoute
+  '/admin/certificates': typeof AdminCertificatesRoute
+  '/admin/education': typeof AdminEducationRoute
+  '/admin/messages': typeof AdminMessagesRoute
+  '/admin/profile': typeof AdminProfileRoute
+  '/admin/projects': typeof AdminProjectsRoute
+  '/admin/settings': typeof AdminSettingsRoute
+  '/admin/skills': typeof AdminSkillsRoute
   '/admin/login': typeof AdminLoginRoute
   '/admin': typeof AdminIndexRoute
 }
@@ -104,6 +168,14 @@ export interface FileRoutesById {
   '/contact': typeof ContactRoute
   '/projects': typeof ProjectsRoute
   '/skills': typeof SkillsRoute
+  '/admin/achievements': typeof AdminAchievementsRoute
+  '/admin/certificates': typeof AdminCertificatesRoute
+  '/admin/education': typeof AdminEducationRoute
+  '/admin/messages': typeof AdminMessagesRoute
+  '/admin/profile': typeof AdminProfileRoute
+  '/admin/projects': typeof AdminProjectsRoute
+  '/admin/settings': typeof AdminSettingsRoute
+  '/admin/skills': typeof AdminSkillsRoute
   '/admin_/login': typeof AdminLoginRoute
   '/admin/': typeof AdminIndexRoute
 }
@@ -118,6 +190,14 @@ export interface FileRouteTypes {
     | '/contact'
     | '/projects'
     | '/skills'
+    | '/admin/achievements'
+    | '/admin/certificates'
+    | '/admin/education'
+    | '/admin/messages'
+    | '/admin/profile'
+    | '/admin/projects'
+    | '/admin/settings'
+    | '/admin/skills'
     | '/admin/login'
     | '/admin/'
   fileRoutesByTo: FileRoutesByTo
@@ -129,6 +209,14 @@ export interface FileRouteTypes {
     | '/contact'
     | '/projects'
     | '/skills'
+    | '/admin/achievements'
+    | '/admin/certificates'
+    | '/admin/education'
+    | '/admin/messages'
+    | '/admin/profile'
+    | '/admin/projects'
+    | '/admin/settings'
+    | '/admin/skills'
     | '/admin/login'
     | '/admin'
   id:
@@ -141,6 +229,14 @@ export interface FileRouteTypes {
     | '/contact'
     | '/projects'
     | '/skills'
+    | '/admin/achievements'
+    | '/admin/certificates'
+    | '/admin/education'
+    | '/admin/messages'
+    | '/admin/profile'
+    | '/admin/projects'
+    | '/admin/settings'
+    | '/admin/skills'
     | '/admin_/login'
     | '/admin/'
   fileRoutesById: FileRoutesById
@@ -222,6 +318,62 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AdminIndexRouteImport
       parentRoute: typeof AdminRoute
     }
+    '/admin/achievements': {
+      id: '/admin/achievements'
+      path: '/achievements'
+      fullPath: '/admin/achievements'
+      preLoaderRoute: typeof AdminAchievementsRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/certificates': {
+      id: '/admin/certificates'
+      path: '/certificates'
+      fullPath: '/admin/certificates'
+      preLoaderRoute: typeof AdminCertificatesRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/education': {
+      id: '/admin/education'
+      path: '/education'
+      fullPath: '/admin/education'
+      preLoaderRoute: typeof AdminEducationRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/messages': {
+      id: '/admin/messages'
+      path: '/messages'
+      fullPath: '/admin/messages'
+      preLoaderRoute: typeof AdminMessagesRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/profile': {
+      id: '/admin/profile'
+      path: '/profile'
+      fullPath: '/admin/profile'
+      preLoaderRoute: typeof AdminProfileRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/projects': {
+      id: '/admin/projects'
+      path: '/projects'
+      fullPath: '/admin/projects'
+      preLoaderRoute: typeof AdminProjectsRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/settings': {
+      id: '/admin/settings'
+      path: '/settings'
+      fullPath: '/admin/settings'
+      preLoaderRoute: typeof AdminSettingsRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/skills': {
+      id: '/admin/skills'
+      path: '/skills'
+      fullPath: '/admin/skills'
+      preLoaderRoute: typeof AdminSkillsRouteImport
+      parentRoute: typeof AdminRoute
+    }
     '/admin_/login': {
       id: '/admin_/login'
       path: '/admin/login'
@@ -233,10 +385,26 @@ declare module '@tanstack/react-router' {
 }
 
 interface AdminRouteChildren {
+  AdminAchievementsRoute: typeof AdminAchievementsRoute
+  AdminCertificatesRoute: typeof AdminCertificatesRoute
+  AdminEducationRoute: typeof AdminEducationRoute
+  AdminMessagesRoute: typeof AdminMessagesRoute
+  AdminProfileRoute: typeof AdminProfileRoute
+  AdminProjectsRoute: typeof AdminProjectsRoute
+  AdminSettingsRoute: typeof AdminSettingsRoute
+  AdminSkillsRoute: typeof AdminSkillsRoute
   AdminIndexRoute: typeof AdminIndexRoute
 }
 
 const AdminRouteChildren: AdminRouteChildren = {
+  AdminAchievementsRoute: AdminAchievementsRoute,
+  AdminCertificatesRoute: AdminCertificatesRoute,
+  AdminEducationRoute: AdminEducationRoute,
+  AdminMessagesRoute: AdminMessagesRoute,
+  AdminProfileRoute: AdminProfileRoute,
+  AdminProjectsRoute: AdminProjectsRoute,
+  AdminSettingsRoute: AdminSettingsRoute,
+  AdminSkillsRoute: AdminSkillsRoute,
   AdminIndexRoute: AdminIndexRoute,
 }
 
