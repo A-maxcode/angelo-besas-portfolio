@@ -28,10 +28,10 @@ export const Route = createFileRoute("/admin/achievements")({
       toForm={(a) => ({ title: a.title, category: a.category, date: a.date, description: a.description })}
       fromForm={(v, ex) => ({
         id: ex?.id ?? newId("ach"),
-        title: v.title.trim(),
-        category: v.category.trim() || "Uncategorized",
-        date: v.date.trim() || "Date TBA",
-        description: v.description.trim(),
+        title: v("title").trim(),
+        category: v("category").trim() || "Uncategorized",
+        date: v("date").trim() || "Date TBA",
+        description: v("description").trim(),
         featured: ex?.featured,
         status: ex?.status ?? "placeholder",
       })}

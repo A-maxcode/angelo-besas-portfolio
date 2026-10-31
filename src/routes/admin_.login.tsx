@@ -23,7 +23,7 @@ const loginSchema = z.object({
 });
 
 function LoginPage() {
-  const [errors, setErrors] = useState<{ email?: string; password?: string }>({});
+  const [errors, setErrors] = useState<{ email?: string | undefined; password?: string | undefined }>({});
 
   const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();

@@ -27,10 +27,10 @@ export const Route = createFileRoute("/admin/education")({
       toForm={(e) => ({ degree: e.degree, school: e.school, period: e.period, description: e.description })}
       fromForm={(v, ex) => ({
         id: ex?.id ?? newId("edu"),
-        degree: v.degree.trim(),
-        school: v.school.trim(),
-        period: v.period.trim() || "Dates to be added",
-        description: v.description.trim(),
+        degree: v("degree").trim(),
+        school: v("school").trim(),
+        period: v("period").trim() || "Dates to be added",
+        description: v("description").trim(),
         status: ex?.status ?? "placeholder",
       })}
     />

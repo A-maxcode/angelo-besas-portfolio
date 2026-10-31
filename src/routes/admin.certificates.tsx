@@ -41,10 +41,10 @@ export const Route = createFileRoute("/admin/certificates")({
       toForm={(c) => ({ title: c.title, issuer: c.issuer, date: c.date, credentialUrl: c.credentialUrl ?? "" })}
       fromForm={(v, ex) => ({
         id: ex?.id ?? newId("cert"),
-        title: v.title.trim(),
-        issuer: v.issuer.trim() || "Issuer to be added",
-        date: v.date.trim() || "Date TBA",
-        credentialUrl: v.credentialUrl.trim() || undefined,
+        title: v("title").trim(),
+        issuer: v("issuer").trim() || "Issuer to be added",
+        date: v("date").trim() || "Date TBA",
+        credentialUrl: v("credentialUrl").trim() || undefined,
         documentType: ex?.documentType ?? "image",
         status: ex?.status ?? "placeholder",
       })}

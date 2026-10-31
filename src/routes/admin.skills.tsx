@@ -30,9 +30,9 @@ export const Route = createFileRoute("/admin/skills")({
       toForm={(g) => ({ title: g.title, description: g.description, skills: g.skills.join(", ") })}
       fromForm={(v, ex) => ({
         id: ex?.id ?? newId("sk"),
-        title: v.title.trim(),
-        description: v.description.trim(),
-        skills: splitTags(v.skills),
+        title: v("title").trim(),
+        description: v("description").trim(),
+        skills: splitTags(v("skills")),
         status: ex?.status ?? "placeholder",
       })}
     />

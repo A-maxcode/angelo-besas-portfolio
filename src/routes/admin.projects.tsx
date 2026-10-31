@@ -41,11 +41,11 @@ export const Route = createFileRoute("/admin/projects")({
       toForm={(p) => ({ title: p.title, summary: p.summary, tech: p.tech.join(", "), repoUrl: p.repoUrl ?? "", liveUrl: p.liveUrl ?? "" })}
       fromForm={(v, ex) => ({
         id: ex?.id ?? newId("proj"),
-        title: v.title.trim(),
-        summary: v.summary.trim(),
-        tech: splitTags(v.tech),
-        repoUrl: v.repoUrl.trim() || undefined,
-        liveUrl: v.liveUrl.trim() || undefined,
+        title: v("title").trim(),
+        summary: v("summary").trim(),
+        tech: splitTags(v("tech")),
+        repoUrl: v("repoUrl").trim() || undefined,
+        liveUrl: v("liveUrl").trim() || undefined,
         featured: ex?.featured,
         status: ex?.status ?? "sample",
       })}

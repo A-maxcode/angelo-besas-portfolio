@@ -53,7 +53,7 @@ interface ResourceManagerProps<T extends { id: string }> {
   /** Searchable text for an item. */
   searchText: (item: T) => string;
   toForm: (item: T) => FormValues;
-  fromForm: (values: FormValues, existing?: T) => T;
+  fromForm: (get: (name: string) => string, existing?: T) => T;
 }
 
 /**
@@ -103,11 +103,11 @@ export function ResourceManager<T extends { id: string }>({
   const submit = (e: React.FormEvent) => {
     e.preventDefault();
     const first = fields[0];
-    if (!values[first.name]?.trim()) {
+    if (first && !values[first.name]?.trim()) {
       setErrors({ [first.name]: `${first.label} is required.` });
       return;
     }
-    const next = fromForm(values, editing ?? undefined);
+    const next = fromForm((name) => values[name] ?? "", editing ?? undefined);
     setItems((prev) => (editing ? prev.map((i) => (i.id === editing.id ? next : i)) : [next, ...prev]));
     setFormOpen(false);
     toast.success(`${singular} ${editing ? "updated" : "added"} locally`, {

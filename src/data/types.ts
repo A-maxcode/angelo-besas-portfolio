@@ -11,8 +11,8 @@ export interface Profile {
   mainInterest: string;
   intro: string;
   about: string[];
-  location?: string;
-  email?: string;
+  location?: string | undefined;
+  email?: string | undefined;
 }
 
 export interface Education {
@@ -36,7 +36,7 @@ export interface Achievement {
   category: string;
   date: string;
   description: string;
-  featured?: boolean;
+  featured?: boolean | undefined;
   status: ContentStatus;
 }
 
@@ -45,7 +45,7 @@ export interface Certificate {
   title: string;
   issuer: string;
   date: string;
-  credentialUrl?: string;
+  credentialUrl?: string | undefined;
   documentType: "image" | "pdf";
   status: ContentStatus;
 }
@@ -55,9 +55,9 @@ export interface Project {
   title: string;
   summary: string;
   tech: string[];
-  repoUrl?: string;
-  liveUrl?: string;
-  featured?: boolean;
+  repoUrl?: string | undefined;
+  liveUrl?: string | undefined;
+  featured?: boolean | undefined;
   status: ContentStatus;
 }
 
