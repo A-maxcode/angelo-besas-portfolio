@@ -23,31 +23,10 @@ export const Route = createFileRoute("/")({
 
 function HomePage() {
   const featuredProjects = projects.filter((p) => p.featured);
-  const stats = [
-    { label: "Projects listed", value: projects.length },
-    { label: "Certificates listed", value: certificates.length },
-    { label: "Skill groups", value: skillGroups.length },
-  ];
 
   return (
     <SiteLayout>
       <Hero />
-
-      <section aria-label="Portfolio at a glance" className="relative z-10 -mt-10">
-        <div className="container-page">
-          <dl className="card-surface grid grid-cols-2 divide-border md:grid-cols-4 md:divide-x">
-            {stats.map((s) => (
-              <div key={s.label} className="px-5 py-5 text-center md:py-6">
-                <dd className="text-3xl font-bold text-gradient-brand">{s.value}</dd>
-                <dt className="mt-1 text-xs font-medium text-muted-foreground">{s.label}</dt>
-              </div>
-            ))}
-          </dl>
-          <p className="mt-2 text-center text-xs text-muted-foreground">
-            A quick overview of my projects, credentials, and technical skills.
-          </p>
-        </div>
-      </section>
 
       <Section labelledBy="featured-projects">
         <SectionHeading
