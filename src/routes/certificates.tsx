@@ -22,7 +22,7 @@ function CertificatesPage() {
     <SiteLayout>
       <PageHero
         eyebrow="Certificates"
-        title="Credentials & trainings"
+        title="Credentials & Trainings"
         description="Professional training and certificates."
       />
       <Section>
