@@ -52,10 +52,7 @@ export function CertificateCard({ item }: { item: Certificate }) {
       )}
 
       <div className="flex flex-1 flex-col p-5">
-        <div className="flex items-start justify-between gap-3">
-          <h3 className="font-semibold leading-snug">{item.title}</h3>
-          <StatusBadge status={item.status} />
-        </div>
+        <h3 className="font-semibold leading-snug">{item.title}</h3>
         <dl className="mt-3 grid grid-cols-[auto_1fr] gap-x-3 gap-y-1 text-sm">
           <dt className="text-muted-foreground">Issuer</dt>
           <dd>{item.issuer}</dd>
