@@ -1,21 +1,23 @@
+
 import type { Project } from "./types";
 
 export const projects: Project[] = [
   {
-  id: "mash-social",
-  title: "MASH Social",
-  description: "A social networking platform for connecting and sharing.",
-  category: "Web Application",
-  technologies: ["PHP", "MySQL", "JavaScript", "CSS"],
-  liveUrl: "https://mash-app.freedev.app",
-  status: "live",
-},
-{
-  id: "date-schedule",
-  title: "Date Schedule",
-  description: "An online invitation and date scheduling website.",
-  category: "Web Application",
-  technologies: ["PHP", "MySQL", "JavaScript", "CSS"],
-  liveUrl: "https://dating-schedule.infinityfreeapp.com/create_invitation.php",
-  status: "live",
-},
+    id: "mash-social",
+    title: "MASH Social",
+    summary: "A social networking platform for connecting and sharing.",
+    tech: ["PHP", "MySQL", "JavaScript", "CSS"],
+    liveUrl: "https://mash-app.freedev.app/",
+    featured: true,
+    status: "sample",
+  },
+  {
+    id: "date-schedule",
+    title: "Date Schedule",
+    summary: "An online invitation and date scheduling website.",
+    tech: ["PHP", "MySQL", "JavaScript", "CSS"],
+    liveUrl: "https://dating-schedule.infinityfreeapp.com/create_invitation.php",
+    featured: true,
+    status: "sample",
+  },
+];
