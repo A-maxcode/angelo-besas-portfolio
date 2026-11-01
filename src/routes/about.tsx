@@ -20,7 +20,7 @@ export const Route = createFileRoute("/about")({
 function AboutPage() {
   return (
     <SiteLayout>
-      <PageHero eyebrow="About" title="Hi, I'm Angelo." description={`${profile.headline} · ${profile.mainInterest}`} />
+      <PageHero eyebrow="About"/>
 
       <Section labelledBy="overview">
         <div className="grid gap-8 lg:grid-cols-[1fr_2fr]">
