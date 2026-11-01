@@ -23,7 +23,7 @@ function AchievementsPage() {
       <PageHero
         eyebrow="Achievements"
         title="Milestones along the way"
-        description="Entries below are placeholders and will be replaced with verified achievements."
+        description="Academic, competition, and leadership achievements."
       />
       <Section>
         {achievements.length === 0 ? (
