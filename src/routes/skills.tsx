@@ -22,7 +22,7 @@ function SkillsPage() {
     <SiteLayout>
       <PageHero
         eyebrow="Skills"
-        title="Tools and technologies"
+        title="Tools & Technologies"
         description="Technologies, programming languages, development tools, AI assistants, and IT skills I use across different areas of technology."
       />
       <Section>
