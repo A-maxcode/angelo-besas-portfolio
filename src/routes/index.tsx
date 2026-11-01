@@ -95,23 +95,7 @@ function Hero() {
     <section className="relative overflow-hidden bg-hero text-navy-foreground" aria-labelledby="hero-title">
       <div aria-hidden="true" className="grid-lines absolute inset-0" />
       <div className="container-page relative grid items-center gap-12 pb-24 pt-14 md:pt-20 lg:grid-cols-[1.15fr_1fr] lg:pb-32 lg:pt-24">
-        <div className="animate-fade-up">
-          <Badge variant="dark" className="font-mono">
-            <span className="size-1.5 rounded-full bg-cyan" aria-hidden="true" /> {profile.headline}
-          </Badge>
-          <h1 id="hero-title" className="mt-5 text-4xl font-extrabold leading-[1.05] sm:text-5xl lg:text-6xl">
-            {profile.name.split(" ")[0]}{" "}
-            <span className="text-gradient-brand">{profile.name.split(" ").slice(1).join(" ")}</span>
-          </h1>
-          <p className="mt-4 flex flex-wrap items-center gap-x-2 gap-y-1 text-sm text-navy-muted md:text-base">
-            <GraduationCap className="size-4 text-cyan" aria-hidden="true" />
-            {profile.course}
-            <span aria-hidden="true">·</span>
-            {profile.school}
-          </p>
-         <p className="mt-6 max-w-xl text-base text-navy-muted md:text-lg">{profile.intro}</p>
-</div>
-<CodeCard />
+       <CodeCard/>
       </div>
     </section>
   );
