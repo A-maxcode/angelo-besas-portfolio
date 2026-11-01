@@ -1,4 +1,3 @@
-
 import { Award, Calendar, ExternalLink, FileText, ImageIcon } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import type { Achievement, Certificate, Project, SkillGroup } from "@/data/types";
@@ -110,7 +109,7 @@ export function ProjectCard({ item }: { item: Project }) {
                 rel="noreferrer"
                 className="inline-flex items-center gap-1.5 text-sm font-medium text-primary hover:underline"
               >
-                Live demo <ExternalLink className="size-3.5" />
+                Live <ExternalLink className="size-3.5" />
               </a>
             )}
           </div>
