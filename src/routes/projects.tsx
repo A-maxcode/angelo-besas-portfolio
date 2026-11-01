@@ -22,8 +22,8 @@ function ProjectsPage() {
     <SiteLayout>
       <PageHero
         eyebrow="Projects"
-        title="Things I'm building"
-        description="Sample projects are labeled. Repositories stay private during development."
+        title="Real Projects, Built and Launched"
+        description="Explore real projects I've built, including live websites and the technologies behind each one."
       />
       <Section>
         {projects.length === 0 ? (
