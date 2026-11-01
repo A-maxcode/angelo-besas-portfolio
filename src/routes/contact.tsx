@@ -1,8 +1,10 @@
+import { useState } from "react";
 import { createFileRoute } from "@tanstack/react-router";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Send, GraduationCap, Code2 } from "lucide-react";
 import { toast } from "sonner";
+
 import { SiteLayout } from "@/components/site/SiteLayout";
 import { PageHero } from "@/components/site/PageHero";
 import { Section } from "@/components/site/Section";
@@ -10,11 +12,21 @@ import { FormField } from "@/components/site/FormField";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
+
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+
 import {
   CONTACT_LIMITS,
   contactSchema,
   type ContactValues,
 } from "@/lib/contact-schema";
+
 import { profile } from "@/data/profile";
 import { pageMeta } from "@/lib/seo";
 
@@ -27,12 +39,25 @@ export const Route = createFileRoute("/contact")({
   component: ContactPage,
 });
 
+const subjectOptions = [
+  "Website Development Inquiry",
+  "Project Collaboration",
+  "Freelance Opportunity",
+  "Portfolio Feedback",
+  "General Inquiry",
+  "Job Opportunity",
+  "Others",
+];
+
 function ContactPage() {
+  const [subjectChoice, setSubjectChoice] = useState("");
+
   const {
     register,
     handleSubmit,
     reset,
     watch,
+    setValue,
     formState: { errors, isSubmitting },
   } = useForm<ContactValues>({
     resolver: zodResolver(contactSchema),
@@ -68,6 +93,7 @@ function ContactPage() {
       });
 
       reset();
+      setSubjectChoice("");
     } catch {
       toast.error("Message could not be sent.", {
         description: "Please check your connection and try again.",
@@ -88,6 +114,7 @@ function ContactPage() {
           <aside className="space-y-4">
             <div className="card-surface p-6">
               <h2 className="font-semibold">About the sender</h2>
+
               <ul className="mt-4 space-y-3 text-sm text-muted-foreground">
                 <li className="flex gap-3">
                   <GraduationCap
@@ -96,6 +123,7 @@ function ContactPage() {
                   />
                   {profile.course}, {profile.school}
                 </li>
+
                 <li className="flex gap-3">
                   <Code2
                     className="size-4 shrink-0 text-primary"
@@ -121,6 +149,7 @@ function ContactPage() {
               >
                 <Input
                   id="name"
+                  placeholder="Enter your full name"
                   autoComplete="name"
                   maxLength={CONTACT_LIMITS.name}
                   {...register("name")}
@@ -135,6 +164,7 @@ function ContactPage() {
                 <Input
                   id="email"
                   type="email"
+                  placeholder="you@example.com"
                   autoComplete="email"
                   maxLength={CONTACT_LIMITS.email}
                   {...register("email")}
@@ -147,11 +177,46 @@ function ContactPage() {
               label="Subject"
               error={errors.subject?.message}
             >
-              <Input
-                id="subject"
-                maxLength={CONTACT_LIMITS.subject}
-                {...register("subject")}
-              />
+              <div className="space-y-3">
+                <Select
+                  value={subjectChoice}
+                  onValueChange={(value) => {
+                    setSubjectChoice(value);
+
+                    if (value === "Others") {
+                      setValue("subject", "", {
+                        shouldValidate: true,
+                      });
+                    } else {
+                      setValue("subject", value, {
+                        shouldValidate: true,
+                      });
+                    }
+                  }}
+                >
+                  <SelectTrigger id="subject">
+                    <SelectValue placeholder="Choose a subject" />
+                  </SelectTrigger>
+
+                  <SelectContent>
+                    {subjectOptions.map((option) => (
+                      <SelectItem key={option} value={option}>
+                        {option}
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+
+                {subjectChoice === "Others" && (
+                  <Input
+                    id="custom-subject"
+                    placeholder="Enter your subject"
+                    maxLength={CONTACT_LIMITS.subject}
+                    autoFocus
+                    {...register("subject")}
+                  />
+                )}
+              </div>
             </FormField>
 
             <FormField
@@ -162,6 +227,7 @@ function ContactPage() {
             >
               <Textarea
                 id="message"
+                placeholder="Write your message here..."
                 rows={6}
                 maxLength={CONTACT_LIMITS.message}
                 {...register("message")}
