@@ -34,9 +34,9 @@ export function PageHero({
             </h1>
           </>
         ) : (
-          <h1 className="text-5xl font-extrabold sm:text-6xl md:text-7xl">
-            {eyebrow}
-          </h1>
+          <h1 className="text-gradient-brand text-5xl font-extrabold sm:text-6xl md:text-7xl">
+          {eyebrow}
+         </h1>
         )}
 
         {description && (
