@@ -109,9 +109,9 @@ function Hero() {
             <span aria-hidden="true">·</span>
             {profile.school}
           </p>
-          <p className="mt-6 max-w-xl text-base text-navy-muted md:text-lg">{profile.intro}</p>
-        
-        <CodeCard />
+         <p className="mt-6 max-w-xl text-base text-navy-muted md:text-lg">{profile.intro}</p>
+</div>
+<CodeCard />
       </div>
     </section>
   );
