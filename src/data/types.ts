@@ -46,6 +46,7 @@ export interface Certificate {
   issuer: string;
   date: string;
   credentialUrl?: string | undefined;
+  imageUrl?: string | undefined;
   documentType: "image" | "pdf";
   status: ContentStatus;
 }
