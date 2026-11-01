@@ -23,7 +23,7 @@ function SkillsPage() {
       <PageHero
         eyebrow="Skills"
         title="Tools and technologies"
-        description="Grouped by area, without ratings. Lists are placeholders until confirmed."
+        description="Technologies, programming languages, development tools, AI assistants, and IT skills I use across different areas of technology."
       />
       <Section>
         {skillGroups.length === 0 ? (
