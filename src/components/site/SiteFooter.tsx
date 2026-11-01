@@ -9,6 +9,9 @@ export function SiteFooter() {
       <div className="container-page grid gap-10 py-12 md:grid-cols-[1.2fr_1fr]">
         <div className="space-y-4">
           <Logo />
+          <p className="max-w-sm text-sm">
+  {profile.course} student at {profile.school}.
+</p>
         </div>
         <nav aria-label="Footer">
           <ul className="grid grid-cols-2 gap-x-6 gap-y-2 sm:grid-cols-3">
