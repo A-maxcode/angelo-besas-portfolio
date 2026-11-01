@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { ArrowRight, GraduationCap, Code2, Mail } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -153,6 +154,74 @@ function Hero() {
 }
 
 function CodeCard() {
+  const codeLines = [
+    { text: "const ", className: "text-cyan" },
+    { text: "developer", className: "text-navy-foreground" },
+    { text: " = {", className: "text-navy-muted" },
+    { text: "\n  name: ", className: "text-navy-muted" },
+    { text: `"${profile.name}"`, className: "text-brand" },
+    { text: ",", className: "text-navy-muted" },
+    { text: "\n  role: ", className: "text-navy-muted" },
+    { text: `"${profile.headline}"`, className: "text-brand" },
+    { text: ",", className: "text-navy-muted" },
+    { text: "\n  school: ", className: "text-navy-muted" },
+    { text: `"${profile.school}"`, className: "text-brand" },
+    { text: ",", className: "text-navy-muted" },
+    { text: "\n  focus: ", className: "text-navy-muted" },
+    { text: `"${profile.mainInterest}"`, className: "text-brand" },
+    { text: ",", className: "text-navy-muted" },
+    { text: "\n  learning: ", className: "text-navy-muted" },
+    { text: "true", className: "text-cyan" },
+    { text: ",", className: "text-navy-muted" },
+    { text: "\n};", className: "text-navy-muted" },
+  ];
+
+  const fullText = codeLines.map((l) => l.text).join("");
+  const [displayedLength, setDisplayedLength] = useState(0);
+  const [showCursor, setShowCursor] = useState(true);
+
+  useEffect(() => {
+    // Reset and replay typing every time user visits the home page
+    setDisplayedLength(0);
+    setShowCursor(true);
+
+    let current = 0;
+    const interval = setInterval(() => {
+      current += 1;
+      setDisplayedLength(current);
+      if (current >= fullText.length) {
+        clearInterval(interval);
+      }
+    }, 28); // typing speed
+
+    return () => clearInterval(interval);
+  }, []);
+
+  // Cursor blink
+  useEffect(() => {
+    const blink = setInterval(() => {
+      setShowCursor((prev) => !prev);
+    }, 530);
+    return () => clearInterval(blink);
+  }, []);
+
+  // Build typed content with correct colors
+  let charCount = 0;
+  const typedElements = codeLines.map((line, index) => {
+    const start = charCount;
+    const end = charCount + line.text.length;
+    charCount = end;
+
+    if (displayedLength <= start) return null;
+
+    const visibleText = line.text.slice(0, Math.max(0, displayedLength - start));
+    return (
+      <span key={index} className={line.className}>
+        {visibleText}
+      </span>
+    );
+  });
+
   return (
     <figure
       className="animate-fade-up rounded-2xl border border-navy-border bg-navy/80 shadow-glow backdrop-blur [animation-delay:150ms]"
@@ -167,13 +236,13 @@ function CodeCard() {
       </div>
       <pre className="overflow-x-auto p-5 font-mono text-[0.8rem] leading-relaxed text-navy-muted sm:text-sm">
         <code>
-          <span className="text-cyan">const</span> <span className="text-navy-foreground">developer</span> = {"{"}
-          {"\n"}  name: <span className="text-brand">"{profile.name}"</span>,
-          {"\n"}  role: <span className="text-brand">"{profile.headline}"</span>,
-          {"\n"}  school: <span className="text-brand">"{profile.school}"</span>,
-          {"\n"}  focus: <span className="text-brand">"{profile.mainInterest}"</span>,
-          {"\n"}  learning: <span className="text-cyan">true</span>,
-          {"\n"}{"}"};<span className="animate-blink text-cyan">▍</span>
+          {typedElements}
+          {showCursor && displayedLength < fullText.length && (
+            <span className="text-cyan">|</span>
+          )}
+          {displayedLength >= fullText.length && (
+            <span className="animate-blink text-cyan">|</span>
+          )}
         </code>
       </pre>
     </figure>
