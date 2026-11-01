@@ -110,18 +110,7 @@ function Hero() {
             {profile.school}
           </p>
           <p className="mt-6 max-w-xl text-base text-navy-muted md:text-lg">{profile.intro}</p>
-          <div className="mt-8 flex flex-col gap-3 sm:flex-row">
-            <Button asChild size="lg" variant="hero">
-              <Link to="/projects">
-                View projects <ArrowRight />
-              </Link>
-            </Button>
-            <Button asChild size="lg" variant="heroOutline">
-              <Link to="/about">About me</Link>
-            </Button>
-          </div>
-        </div>
-
+        
         <CodeCard />
       </div>
     </section>
