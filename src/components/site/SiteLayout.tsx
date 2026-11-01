@@ -1,6 +1,7 @@
 import type { ReactNode } from "react";
 import { SiteHeader } from "./SiteHeader";
 import { SiteFooter } from "./SiteFooter";
+import { AIChatbot } from "./AIChatbot";
 
 export function SiteLayout({ children }: { children: ReactNode }) {
   return (
@@ -16,6 +17,7 @@ export function SiteLayout({ children }: { children: ReactNode }) {
         {children}
       </main>
       <SiteFooter />
+      <AIChatbot />
     </div>
   );
 }
