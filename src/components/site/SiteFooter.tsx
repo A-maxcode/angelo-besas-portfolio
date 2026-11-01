@@ -28,7 +28,6 @@ export function SiteFooter() {
       <div className="border-t border-navy-border">
         <div className="container-page flex flex-col gap-2 py-5 text-xs sm:flex-row sm:items-center sm:justify-between">
           <p>© {new Date().getFullYear()} {profile.name}. All rights reserved.</p>
-          <p className="font-mono">Milestone 1 · frontend preview</p>
         </div>
       </div>
     </footer>
