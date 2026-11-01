@@ -46,7 +46,7 @@ function HomePage() {
             ))}
           </dl>
           <p className="mt-2 text-center text-xs text-muted-foreground">
-            Counts reflect current entries, including sample and placeholder content.
+            A quick overview of my projects, credentials, and technical skills.
           </p>
         </div>
       </section>
