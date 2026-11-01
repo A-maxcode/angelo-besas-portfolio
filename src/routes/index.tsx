@@ -8,7 +8,6 @@ import { Section, SectionHeading } from "@/components/site/Section";
 import { CertificateCard, ProjectCard } from "@/components/site/cards";
 import { profile } from "@/data/profile";
 import { projects } from "@/data/projects";
-import { achievements } from "@/data/achievements";
 import { certificates } from "@/data/certificates";
 import { skillGroups } from "@/data/skills";
 import { pageMeta } from "@/lib/seo";
@@ -26,7 +25,6 @@ function HomePage() {
   const featuredProjects = projects.filter((p) => p.featured);
   const stats = [
     { label: "Projects listed", value: projects.length },
-    { label: "Achievements listed", value: achievements.length },
     { label: "Certificates listed", value: certificates.length },
     { label: "Skill groups", value: skillGroups.length },
   ];
