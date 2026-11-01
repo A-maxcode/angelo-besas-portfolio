@@ -1,7 +1,5 @@
 import type { Project } from "./types";
 
-// Sample/demo projects — clearly labeled in the UI. Repository and live links
-// are intentionally empty (private during development).
 export const projects: Project[] = [
   {
   id: "mash-social",
