@@ -13,8 +13,6 @@ type Message = {
 
 const HISTORY_KEY = "portfolio-ai-chat-history";
 
-const OPENAI_API_KEY = import.meta.env.VITE_OPENAI_API_KEY || "";
-
 const SYSTEM_PROMPT = `You are a helpful AI assistant embedded in Angelo Besas' personal portfolio website.
 
 About Angelo:
