@@ -27,21 +27,33 @@ export function AchievementCard({ item }: { item: Achievement }) {
 
 export function CertificateCard({ item }: { item: Certificate }) {
   const DocIcon = item.documentType === "pdf" ? FileText : ImageIcon;
+
   return (
     <article className="card-surface card-interactive flex h-full flex-col overflow-hidden">
-      <div
-        className="placeholder-hatch flex aspect-[4/3] flex-col items-center justify-center gap-2 border-b text-muted-foreground"
-        role="img"
-        aria-label={`${item.documentType === "pdf" ? "PDF document" : "Certificate image"} placeholder`}
-      >
-        <DocIcon className="size-8" aria-hidden="true" />
-        <span className="font-mono text-xs">
-          {item.documentType === "pdf" ? "PDF preview" : "Image preview"} · pending upload
-        </span>
-      </div>
+      {item.imageUrl ? (
+        <div className="aspect-[4/3] overflow-hidden border-b bg-muted">
+          <img
+            src={item.imageUrl}
+            alt={item.title}
+            className="h-full w-full object-cover object-top transition-transform duration-300 hover:scale-105"
+          />
+        </div>
+      ) : (
+        <div
+          className="placeholder-hatch flex aspect-[4/3] flex-col items-center justify-center gap-2 border-b text-muted-foreground"
+          role="img"
+          aria-label={`${item.documentType === "pdf" ? "PDF document" : "Certificate image"} placeholder`}
+        >
+          <DocIcon className="size-8" aria-hidden="true" />
+          <span className="font-mono text-xs">
+            {item.documentType === "pdf" ? "PDF preview" : "Image preview"} · pending upload
+          </span>
+        </div>
+      )}
+
       <div className="flex flex-1 flex-col p-5">
         <div className="flex items-start justify-between gap-3">
-          <h3 className="font-semibold">{item.title}</h3>
+          <h3 className="font-semibold leading-snug">{item.title}</h3>
           <StatusBadge status={item.status} />
         </div>
         <dl className="mt-3 grid grid-cols-[auto_1fr] gap-x-3 gap-y-1 text-sm">
