@@ -122,77 +122,92 @@ export function AIChatbot() {
   };
 
   const sendMessage = async () => {
-    const text = input.trim();
-    if (!text || loading) return;
+  const text = input.trim();
+  if (!text || loading) return;
 
-    if (!config.apiKey) {
-      setShowSettings(true);
-      setError("Please add your API key first.");
-      return;
+  if (!config.apiKey) {
+    setShowSettings(true);
+    setError("Please add your API key first.");
+    return;
+  }
+
+  const userMessage: Message = { role: "user", content: text };
+  const nextMessages = [...messages, userMessage];
+  setMessages(nextMessages);
+  setInput("");
+  setLoading(true);
+  setError(null);
+
+  try {
+    const endpoint =
+      config.provider === "xai"
+        ? "https://api.x.ai/v1/chat/completions"
+        : "https://api.openai.com/v1/chat/completions";
+
+    const payload = {
+      model: config.model || DEFAULT_MODELS[config.provider],
+      messages: [
+        { role: "system", content: SYSTEM_PROMPT },
+        ...nextMessages.map((m) => ({ role: m.role, content: m.content })),
+      ],
+      temperature: 0.7,
+      max_tokens: 800,
+    };
+
+    const res = await fetch(endpoint, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${config.apiKey}`,
+      },
+      body: JSON.stringify(payload),
+    });
+
+    if (!res.ok) {
+      const errBody = await res.json().catch(() => ({}));
+      const msg =
+        errBody?.error?.message ||
+        errBody?.message ||
+        `API error ${res.status}`;
+      throw new Error(msg);
     }
 
-    const userMessage: Message = { role: "user", content: text };
-    const nextMessages = [...messages, userMessage];
-    setMessages(nextMessages);
-    setInput("");
-    setLoading(true);
-    setError(null);
+    const data = await res.json();
+    const assistantContent =
+      data.choices?.[0]?.message?.content?.trim() ||
+      "Sorry, I couldn't generate a response.";
 
-    try {
-      const endpoint =
-        config.provider === "xai"
-          ? "https://api.x.ai/v1/chat/completions"
-          : "https://api.openai.com/v1/chat/completions";
+    const assistantMessage: Message = {
+      role: "assistant",
+      content: assistantContent,
+    };
 
-      const payload = {
-        model: config.model || DEFAULT_MODELS[config.provider],
-        messages: [
-          { role: "system", content: SYSTEM_PROMPT },
-          ...nextMessages.map((m) => ({ role: m.role, content: m.content })),
-        ],
-        temperature: 0.7,
-        max_tokens: 800,
-      };
+    const finalMessages = [...nextMessages, assistantMessage];
+    setMessages(finalMessages);
+    saveHistory(finalMessages);
+  } catch (err: unknown) {
+    let message = err instanceof Error ? err.message : "Something went wrong.";
 
-      const res = await fetch(endpoint, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${config.apiKey}`,
-        },
-        body: JSON.stringify(payload),
-      });
-
-      if (!res.ok) {
-        const errBody = await res.json().catch(() => ({}));
-        const msg =
-          errBody?.error?.message ||
-          errBody?.message ||
-          `API error ${res.status}`;
-        throw new Error(msg);
-      }
-
-      const data = await res.json();
-      const assistantContent =
-        data.choices?.[0]?.message?.content?.trim() ||
-        "Sorry, I couldn't generate a response.";
-
-      const assistantMessage: Message = {
-        role: "assistant",
-        content: assistantContent,
-      };
-
-      const finalMessages = [...nextMessages, assistantMessage];
-      setMessages(finalMessages);
-      saveHistory(finalMessages);
-    } catch (err: unknown) {
-      const message =
-        err instanceof Error ? err.message : "Something went wrong.";
-      setError(message);
-    } finally {
-      setLoading(false);
+    // Clean message for free-tier users
+    const lower = message.toLowerCase();
+    if (
+      lower.includes("billing") ||
+      lower.includes("not active") ||
+      lower.includes("payment") ||
+      lower.includes("quota") ||
+      lower.includes("insufficient") ||
+      lower.includes("exceeded") ||
+      lower.includes("rate limit") ||
+      lower.includes("403")
+    ) {
+      message = "Free tier limit reached or key issue. Please try again later or check your API key.";
     }
-  };
+
+    setError(message);
+  } finally {
+    setLoading(false);
+  }
+};
 
   const handleKeyDown = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
     if (e.key === "Enter" && !e.shiftKey) {
