@@ -27,7 +27,7 @@ About Angelo:
 Your role:
 - Answer questions about Angelo, his skills, projects, education, and portfolio in a friendly, professional tone.
 - Keep responses concise and useful.
-- Never invent specific project details or achievements. If unsure, suggest contacting Angelo via the Contact page.
+- Never invent specific project details, certificates, or credentials. If unsure, suggest contacting Angelo via the Contact page.
 `;
 
 function loadHistory(): Message[] {
