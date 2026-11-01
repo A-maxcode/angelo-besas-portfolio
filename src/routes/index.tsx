@@ -16,7 +16,7 @@ export const Route = createFileRoute("/")({
   head: () =>
     pageMeta(
       "Angelo Besas — Young IT · Web Development Portfolio",
-      "Angelo Besas is a BS Information Technology student at Holy Name University focused on web development. Explore projects, achievements, and skills.",
+      "Angelo Besas is a BS Information Technology student at Holy Name University focused on web development. Explore projects, certificates, and skills.",
     ),
   component: HomePage,
 });
@@ -33,7 +33,6 @@ function HomePage() {
           id="featured-projects"
           eyebrow="Selected work"
           title="Featured projects"
-          description="Sample projects shown for layout — real work will replace them."
           action={
             <Button asChild variant="outline">
               <Link to="/projects">
