@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { SiteLayout } from "@/components/site/SiteLayout";
 import { Section, SectionHeading } from "@/components/site/Section";
-import { AchievementCard, ProjectCard } from "@/components/site/cards";
+import { CertificateCard, ProjectCard } from "@/components/site/cards";
 import { profile } from "@/data/profile";
 import { projects } from "@/data/projects";
 import { achievements } from "@/data/achievements";
@@ -24,7 +24,6 @@ export const Route = createFileRoute("/")({
 
 function HomePage() {
   const featuredProjects = projects.filter((p) => p.featured);
-  const featuredAchievements = achievements.filter((a) => a.featured);
   const stats = [
     { label: "Projects listed", value: projects.length },
     { label: "Achievements listed", value: achievements.length },
@@ -73,25 +72,25 @@ function HomePage() {
         </div>
       </Section>
 
-      <Section labelledBy="featured-achievements" className="bg-card border-y">
-        <SectionHeading
-          id="featured-achievements"
-          eyebrow="Milestones"
-          title="Featured achievements"
-          action={
-            <Button asChild variant="outline">
-              <Link to="/achievements">
-                All achievements <ArrowRight />
-              </Link>
-            </Button>
-          }
-        />
-        <div className="grid gap-6 md:grid-cols-2">
-          {featuredAchievements.map((a) => (
-            <AchievementCard key={a.id} item={a} />
-          ))}
-        </div>
-      </Section>
+      <Section labelledBy="featured-certificates" className="bg-card border-y">
+  <SectionHeading
+    id="featured-certificates"
+    eyebrow="Credentials"
+    title="Featured certificates"
+    action={
+      <Button asChild variant="outline">
+        <Link to="/certificates">
+          All certificates <ArrowRight />
+        </Link>
+      </Button>
+    }
+  />
+  <div className="grid gap-6 md:grid-cols-2">
+    {certificates.map((certificate) => (
+      <CertificateCard key={certificate.id} item={certificate} />
+    ))}
+  </div>
+</Section>
 
       <Section labelledBy="cta">
         <div className="relative overflow-hidden rounded-2xl bg-hero px-6 py-12 text-navy-foreground md:px-12">
