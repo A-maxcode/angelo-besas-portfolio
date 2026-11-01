@@ -1,29 +1,22 @@
 import type { Certificate } from "./types";
 
-// Placeholder entries only — no real certificates are claimed here.
 export const certificates: Certificate[] = [
   {
     id: "cert-1",
-    title: "Certificate title placeholder",
-    issuer: "Issuer to be added",
-    date: "Date TBA",
+    title: "Networking Devices and Basic Configuration",
+    issuer: "Cisco Networking Academy",
+    date: "Oct 26, 2026",
+    imageUrl: "/certificates/cisco-networking-devices.jpg",
     documentType: "image",
-    status: "placeholder",
+    status: "sample",
   },
   {
     id: "cert-2",
-    title: "Certificate title placeholder",
-    issuer: "Issuer to be added",
-    date: "Date TBA",
-    documentType: "pdf",
-    status: "placeholder",
-  },
-  {
-    id: "cert-3",
-    title: "Certificate title placeholder",
-    issuer: "Issuer to be added",
-    date: "Date TBA",
+    title: "Network Addressing and Basic Troubleshooting",
+    issuer: "Cisco Networking Academy",
+    date: "Oct 05, 2026",
+    imageUrl: "/certificates/cisco-network-addressing.jpg",
     documentType: "image",
-    status: "placeholder",
+    status: "sample",
   },
 ];
