@@ -9,7 +9,7 @@ export const projects: Project[] = [
   description: "A social networking platform for connecting and sharing.",
   category: "Web Application",
   technologies: ["PHP", "MySQL", "JavaScript", "CSS"],
-  liveUrl: "https://mash-app.freedev.app/",
+  liveUrl: "https://mash-app.freedev.app",
   status: "live",
 },
 {
