@@ -3,15 +3,14 @@ import { cn } from "@/lib/utils";
 
 export function Monogram({ className }: { className?: string }) {
   return (
-    <span
-      aria-hidden="true"
+    <img
+      src="/profile.jpg"          
+      alt="Angelo Besas"
       className={cn(
-        "grid size-9 place-items-center rounded-lg bg-gradient-brand font-mono text-sm font-bold text-primary-foreground",
+        "size-9 rounded-lg object-cover ring-1 ring-navy-border",
         className,
       )}
-    >
-      AB
-    </span>
+    />
   );
 }
 
