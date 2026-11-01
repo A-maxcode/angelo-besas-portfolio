@@ -8,7 +8,7 @@ export const projects: Project[] = [
     tech: ["PHP", "MySQL", "JavaScript", "CSS"],
     liveUrl: "https://mash-app.freedev.app/",
     featured: true,
-    status: "sample",
+    status: "live",
   },
   {
     id: "date-schedule",
@@ -17,6 +17,6 @@ export const projects: Project[] = [
     tech: ["PHP", "MySQL", "JavaScript", "CSS"],
     liveUrl: "https://dating-schedule.infinityfreeapp.com/create_invitation.php",
     featured: true,
-    status: "sample",
+    status: "live",
   },
 ];
