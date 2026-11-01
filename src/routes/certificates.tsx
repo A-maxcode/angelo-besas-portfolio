@@ -23,7 +23,7 @@ function CertificatesPage() {
       <PageHero
         eyebrow="Certificates"
         title="Credentials & trainings"
-        description="Certificate documents will be uploaded later. Entries below are placeholders."
+        description="Professional training and certificates."
       />
       <Section>
         {certificates.length === 0 ? (
