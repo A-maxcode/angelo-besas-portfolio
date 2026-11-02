@@ -38,7 +38,7 @@ export function ChatInput({
         }}
         placeholder="Message A-Max AI..."
         rows={1}
-        maxLength={8000}
+        maxLength={4000}
         disabled={disabled}
         className="max-h-40 min-h-10 flex-1 resize-y bg-transparent px-2 py-2 text-sm text-white outline-none placeholder:text-zinc-500 disabled:opacity-50"
       />
