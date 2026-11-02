@@ -27,6 +27,7 @@ function createCookie(token: string, secure: boolean): string {
 
 export async function getOrCreateSession(request: Request) {
   const cookieHeader = request.headers.get("cookie") ?? "";
+
   const existingToken = cookieHeader
     .split(";")
     .map((part) => part.trim())
@@ -38,13 +39,13 @@ export async function getOrCreateSession(request: Request) {
   if (existingToken && /^[a-f0-9]{64}$/i.test(existingToken)) {
     const tokenHash = hashToken(existingToken);
 
-    const existing = await sql`
+    const existing = (await sql`
       SELECT id
       FROM ai_sessions
       WHERE token_hash = ${tokenHash}
         AND expires_at > NOW()
       LIMIT 1
-    ` as SessionRow[];
+    `) as SessionRow[];
 
     if (existing.length > 0) {
       return {
@@ -57,14 +58,14 @@ export async function getOrCreateSession(request: Request) {
   const token = randomBytes(32).toString("hex");
   const tokenHash = hashToken(token);
 
-  const created = await sql`
+  const created = (await sql`
     INSERT INTO ai_sessions (token_hash, expires_at)
     VALUES (
       ${tokenHash},
       NOW() + (${SESSION_DAYS} * INTERVAL '1 day')
     )
     RETURNING id
-  ` as SessionRow[];
+  `) as SessionRow[];
 
   if (!created.length) {
     throw new Error("Could not create visitor session.");
@@ -91,13 +92,15 @@ export async function getSession(request: Request) {
 
   const tokenHash = hashToken(token);
 
-  const rows = await sql`
+  const rows = (await sql`
     SELECT id
     FROM ai_sessions
     WHERE token_hash = ${tokenHash}
       AND expires_at > NOW()
     LIMIT 1
-  ` as SessionRow[];
+  `) as SessionRow[];
 
-  return rows.length > 0 ? rows[0].id : null;
+  return rows.length > 0
+    ? { sessionId: rows[0].id }
+    : null;
 }
