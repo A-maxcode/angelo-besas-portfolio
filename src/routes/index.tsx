@@ -23,6 +23,7 @@ export const Route = createFileRoute("/")({
 
 function HomePage() {
   const featuredProjects = projects.filter((p) => p.featured);
+  const featuredCertificates = certificates.filter((certificate) =>["cert-1", "cert-2"].includes(certificate.id), );
 
   return (
     <SiteLayout>
@@ -129,7 +130,6 @@ function CodeCard() {
   const [showCursor, setShowCursor] = useState(true);
 
   useEffect(() => {
-    // Reset and replay typing every time user visits the home page
     setDisplayedLength(0);
     setShowCursor(true);
 
@@ -140,7 +140,7 @@ function CodeCard() {
       if (current >= fullText.length) {
         clearInterval(interval);
       }
-    }, 28); // typing speed
+    }, 28);
 
     return () => clearInterval(interval);
   }, []);
