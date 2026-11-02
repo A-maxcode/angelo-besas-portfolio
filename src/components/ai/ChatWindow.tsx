@@ -20,6 +20,7 @@ async function apiRequest<T>(
     credentials: "same-origin",
     headers: {
       "Content-Type": "application/json",
+      "X-AMAX-Request": "1",
       ...options?.headers,
     },
   });
@@ -100,7 +101,7 @@ export function ChatWindow() {
         setInitializing(true);
 
         // Initialize the anonymous HTTP-only session cookie.
-        await apiRequest<{ sessionId: string }>("/api/ai/session");
+        await apiRequest<{ ok: boolean }>("/api/ai/session");
 
         // Load conversations belonging to this session.
         const result = await apiRequest<{
