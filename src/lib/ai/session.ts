@@ -1,106 +1,68 @@
-import { createHash, randomBytes } from "node:crypto";
-import { sql } from "./db";
+import { AI_LIMITS } from "./config";
+import type { ChatRepository } from "./repository";
 
-const COOKIE_NAME = "amax_ai_session";
-const SESSION_DAYS = 30;
+/** `__Host-` prefix forces Secure, Path=/ and no Domain on HTTPS. */
+export const SECURE_COOKIE_NAME = "__Host-amax_ai_session";
+/** Plain-HTTP local development only. */
+export const DEV_COOKIE_NAME = "amax_ai_session";
 
-type SessionRow = {
-  id: string;
-};
+const TOKEN_RE = /^[a-f0-9]{64}$/;
 
-function hashToken(token: string): string {
-  return createHash("sha256").update(token).digest("hex");
+function toHex(bytes: Uint8Array): string {
+  return Array.from(bytes, (b) => b.toString(16).padStart(2, "0")).join("");
 }
 
-function createCookie(token: string, secure: boolean): string {
-  const maxAge = SESSION_DAYS * 24 * 60 * 60;
+/** 256-bit random session token (Web Crypto; works on edge and Node). */
+export function generateToken(): string {
+  return toHex(crypto.getRandomValues(new Uint8Array(32)));
+}
 
+/** Only the SHA-256 hash of the token is stored in the database. */
+export async function hashToken(token: string): Promise<string> {
+  const digest = await crypto.subtle.digest("SHA-256", new TextEncoder().encode(token));
+  return toHex(new Uint8Array(digest));
+}
+
+function isSecureRequest(request: Request): boolean {
+  return new URL(request.url).protocol === "https:";
+}
+
+export function readSessionToken(request: Request): string | null {
+  const name = isSecureRequest(request) ? SECURE_COOKIE_NAME : DEV_COOKIE_NAME;
+  const cookieHeader = request.headers.get("cookie") ?? "";
+  for (const part of cookieHeader.split(";")) {
+    const [key, ...rest] = part.trim().split("=");
+    if (key === name) {
+      const value = rest.join("=");
+      return TOKEN_RE.test(value) ? value : null;
+    }
+  }
+  return null;
+}
+
+export function buildSessionCookie(request: Request, token: string): string {
+  const secure = isSecureRequest(request);
   return [
-    `${COOKIE_NAME}=${token}`,
+    `${secure ? SECURE_COOKIE_NAME : DEV_COOKIE_NAME}=${token}`,
     "HttpOnly",
-    "SameSite=Lax",
+    "SameSite=Strict",
     "Path=/",
-    `Max-Age=${maxAge}`,
+    `Max-Age=${AI_LIMITS.sessionDays * 24 * 60 * 60}`,
     ...(secure ? ["Secure"] : []),
   ].join("; ");
 }
 
-export async function getOrCreateSession(request: Request) {
-  const cookieHeader = request.headers.get("cookie") ?? "";
-
-  const existingToken = cookieHeader
-    .split(";")
-    .map((part) => part.trim())
-    .find((part) => part.startsWith(`${COOKIE_NAME}=`))
-    ?.slice(COOKIE_NAME.length + 1);
-
-  const secure = new URL(request.url).protocol === "https:";
-
-  if (existingToken && /^[a-f0-9]{64}$/i.test(existingToken)) {
-    const tokenHash = hashToken(existingToken);
-
-    const existing = (await sql`
-      SELECT id
-      FROM ai_sessions
-      WHERE token_hash = ${tokenHash}
-        AND expires_at > NOW()
-      LIMIT 1
-    `) as SessionRow[];
-
-    if (existing.length > 0) {
-      return {
-        sessionId: existing[0].id,
-        setCookie: null,
-      };
-    }
-  }
-
-  const token = randomBytes(32).toString("hex");
-  const tokenHash = hashToken(token);
-
-  const created = (await sql`
-    INSERT INTO ai_sessions (token_hash, expires_at)
-    VALUES (
-      ${tokenHash},
-      NOW() + (${SESSION_DAYS} * INTERVAL '1 day')
-    )
-    RETURNING id
-  `) as SessionRow[];
-
-  if (!created.length) {
-    throw new Error("Could not create visitor session.");
-  }
-
-  return {
-    sessionId: created[0].id,
-    setCookie: createCookie(token, secure),
-  };
+/** Looks up the caller's anonymous session from its HttpOnly cookie. */
+export async function getSession(request: Request, repo: ChatRepository): Promise<{ sessionId: string } | null> {
+  const token = readSessionToken(request);
+  if (!token) return null;
+  const row = await repo.findActiveSessionByTokenHash(await hashToken(token));
+  return row ? { sessionId: row.id } : null;
 }
 
-export async function getSession(request: Request) {
-  const cookieHeader = request.headers.get("cookie") ?? "";
-
-  const token = cookieHeader
-    .split(";")
-    .map((part) => part.trim())
-    .find((part) => part.startsWith(`${COOKIE_NAME}=`))
-    ?.slice(COOKIE_NAME.length + 1);
-
-  if (!token || !/^[a-f0-9]{64}$/i.test(token)) {
-    return null;
-  }
-
-  const tokenHash = hashToken(token);
-
-  const rows = (await sql`
-    SELECT id
-    FROM ai_sessions
-    WHERE token_hash = ${tokenHash}
-      AND expires_at > NOW()
-    LIMIT 1
-  `) as SessionRow[];
-
-  return rows.length > 0
-    ? { sessionId: rows[0].id }
-    : null;
+export async function createSession(request: Request, repo: ChatRepository, now: Date) {
+  const token = generateToken();
+  const expiresAt = new Date(now.getTime() + AI_LIMITS.sessionDays * 24 * 60 * 60 * 1000);
+  const row = await repo.createSession(await hashToken(token), expiresAt);
+  return { sessionId: row.id, setCookie: buildSessionCookie(request, token) };
 }
