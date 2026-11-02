@@ -11,22 +11,16 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as AboutRouteImport } from './routes/about'
-import { Route as AchievementsRouteImport } from './routes/achievements'
-import { Route as AdminRouteImport } from './routes/admin'
+import { Route as AiRouteImport } from './routes/ai'
 import { Route as CertificatesRouteImport } from './routes/certificates'
 import { Route as ContactRouteImport } from './routes/contact'
 import { Route as ProjectsRouteImport } from './routes/projects'
 import { Route as SkillsRouteImport } from './routes/skills'
-import { Route as AdminIndexRouteImport } from './routes/admin.index'
-import { Route as AdminAchievementsRouteImport } from './routes/admin.achievements'
-import { Route as AdminCertificatesRouteImport } from './routes/admin.certificates'
-import { Route as AdminEducationRouteImport } from './routes/admin.education'
-import { Route as AdminMessagesRouteImport } from './routes/admin.messages'
-import { Route as AdminProfileRouteImport } from './routes/admin.profile'
-import { Route as AdminProjectsRouteImport } from './routes/admin.projects'
-import { Route as AdminSettingsRouteImport } from './routes/admin.settings'
-import { Route as AdminSkillsRouteImport } from './routes/admin.skills'
-import { Route as AdminLoginRouteImport } from './routes/admin_.login'
+import { Route as ApiContactRouteImport } from './routes/api/contact'
+import { Route as ApiAiChatRouteImport } from './routes/api/ai/chat'
+import { Route as ApiAiConversationsRouteImport } from './routes/api/ai/conversations'
+import { Route as ApiAiSessionRouteImport } from './routes/api/ai/session'
+import { Route as ApiAiConversationsConversationIdRouteImport } from './routes/api/ai/conversations/$conversationId'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -38,14 +32,9 @@ const AboutRoute = AboutRouteImport.update({
   path: '/about',
   getParentRoute: () => rootRouteImport,
 } as any)
-const AchievementsRoute = AchievementsRouteImport.update({
-  id: '/achievements',
-  path: '/achievements',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const AdminRoute = AdminRouteImport.update({
-  id: '/admin',
-  path: '/admin',
+const AiRoute = AiRouteImport.update({
+  id: '/ai',
+  path: '/ai',
   getParentRoute: () => rootRouteImport,
 } as any)
 const CertificatesRoute = CertificatesRouteImport.update({
@@ -68,189 +57,133 @@ const SkillsRoute = SkillsRouteImport.update({
   path: '/skills',
   getParentRoute: () => rootRouteImport,
 } as any)
-const AdminIndexRoute = AdminIndexRouteImport.update({
-  id: '/',
-  path: '/',
-  getParentRoute: () => AdminRoute,
-} as any)
-const AdminAchievementsRoute = AdminAchievementsRouteImport.update({
-  id: '/achievements',
-  path: '/achievements',
-  getParentRoute: () => AdminRoute,
-} as any)
-const AdminCertificatesRoute = AdminCertificatesRouteImport.update({
-  id: '/certificates',
-  path: '/certificates',
-  getParentRoute: () => AdminRoute,
-} as any)
-const AdminEducationRoute = AdminEducationRouteImport.update({
-  id: '/education',
-  path: '/education',
-  getParentRoute: () => AdminRoute,
-} as any)
-const AdminMessagesRoute = AdminMessagesRouteImport.update({
-  id: '/messages',
-  path: '/messages',
-  getParentRoute: () => AdminRoute,
-} as any)
-const AdminProfileRoute = AdminProfileRouteImport.update({
-  id: '/profile',
-  path: '/profile',
-  getParentRoute: () => AdminRoute,
-} as any)
-const AdminProjectsRoute = AdminProjectsRouteImport.update({
-  id: '/projects',
-  path: '/projects',
-  getParentRoute: () => AdminRoute,
-} as any)
-const AdminSettingsRoute = AdminSettingsRouteImport.update({
-  id: '/settings',
-  path: '/settings',
-  getParentRoute: () => AdminRoute,
-} as any)
-const AdminSkillsRoute = AdminSkillsRouteImport.update({
-  id: '/skills',
-  path: '/skills',
-  getParentRoute: () => AdminRoute,
-} as any)
-const AdminLoginRoute = AdminLoginRouteImport.update({
-  id: '/admin_/login',
-  path: '/admin/login',
+const ApiContactRoute = ApiContactRouteImport.update({
+  id: '/api/contact',
+  path: '/api/contact',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ApiAiChatRoute = ApiAiChatRouteImport.update({
+  id: '/api/ai/chat',
+  path: '/api/ai/chat',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiAiConversationsRoute = ApiAiConversationsRouteImport.update({
+  id: '/api/ai/conversations',
+  path: '/api/ai/conversations',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiAiSessionRoute = ApiAiSessionRouteImport.update({
+  id: '/api/ai/session',
+  path: '/api/ai/session',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiAiConversationsConversationIdRoute =
+  ApiAiConversationsConversationIdRouteImport.update({
+    id: '/$conversationId',
+    path: '/$conversationId',
+    getParentRoute: () => ApiAiConversationsRoute,
+  } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
-  '/achievements': typeof AchievementsRoute
-  '/admin': typeof AdminRouteWithChildren
+  '/ai': typeof AiRoute
   '/certificates': typeof CertificatesRoute
   '/contact': typeof ContactRoute
   '/projects': typeof ProjectsRoute
   '/skills': typeof SkillsRoute
-  '/admin/achievements': typeof AdminAchievementsRoute
-  '/admin/certificates': typeof AdminCertificatesRoute
-  '/admin/education': typeof AdminEducationRoute
-  '/admin/messages': typeof AdminMessagesRoute
-  '/admin/profile': typeof AdminProfileRoute
-  '/admin/projects': typeof AdminProjectsRoute
-  '/admin/settings': typeof AdminSettingsRoute
-  '/admin/skills': typeof AdminSkillsRoute
-  '/admin/login': typeof AdminLoginRoute
-  '/admin/': typeof AdminIndexRoute
+  '/api/contact': typeof ApiContactRoute
+  '/api/ai/chat': typeof ApiAiChatRoute
+  '/api/ai/conversations': typeof ApiAiConversationsRouteWithChildren
+  '/api/ai/session': typeof ApiAiSessionRoute
+  '/api/ai/conversations/$conversationId': typeof ApiAiConversationsConversationIdRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
-  '/achievements': typeof AchievementsRoute
+  '/ai': typeof AiRoute
   '/certificates': typeof CertificatesRoute
   '/contact': typeof ContactRoute
   '/projects': typeof ProjectsRoute
   '/skills': typeof SkillsRoute
-  '/admin/achievements': typeof AdminAchievementsRoute
-  '/admin/certificates': typeof AdminCertificatesRoute
-  '/admin/education': typeof AdminEducationRoute
-  '/admin/messages': typeof AdminMessagesRoute
-  '/admin/profile': typeof AdminProfileRoute
-  '/admin/projects': typeof AdminProjectsRoute
-  '/admin/settings': typeof AdminSettingsRoute
-  '/admin/skills': typeof AdminSkillsRoute
-  '/admin/login': typeof AdminLoginRoute
-  '/admin': typeof AdminIndexRoute
+  '/api/contact': typeof ApiContactRoute
+  '/api/ai/chat': typeof ApiAiChatRoute
+  '/api/ai/conversations': typeof ApiAiConversationsRouteWithChildren
+  '/api/ai/session': typeof ApiAiSessionRoute
+  '/api/ai/conversations/$conversationId': typeof ApiAiConversationsConversationIdRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
-  '/achievements': typeof AchievementsRoute
-  '/admin': typeof AdminRouteWithChildren
+  '/ai': typeof AiRoute
   '/certificates': typeof CertificatesRoute
   '/contact': typeof ContactRoute
   '/projects': typeof ProjectsRoute
   '/skills': typeof SkillsRoute
-  '/admin/achievements': typeof AdminAchievementsRoute
-  '/admin/certificates': typeof AdminCertificatesRoute
-  '/admin/education': typeof AdminEducationRoute
-  '/admin/messages': typeof AdminMessagesRoute
-  '/admin/profile': typeof AdminProfileRoute
-  '/admin/projects': typeof AdminProjectsRoute
-  '/admin/settings': typeof AdminSettingsRoute
-  '/admin/skills': typeof AdminSkillsRoute
-  '/admin_/login': typeof AdminLoginRoute
-  '/admin/': typeof AdminIndexRoute
+  '/api/contact': typeof ApiContactRoute
+  '/api/ai/chat': typeof ApiAiChatRoute
+  '/api/ai/conversations': typeof ApiAiConversationsRouteWithChildren
+  '/api/ai/session': typeof ApiAiSessionRoute
+  '/api/ai/conversations/$conversationId': typeof ApiAiConversationsConversationIdRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
     | '/about'
-    | '/achievements'
-    | '/admin'
+    | '/ai'
     | '/certificates'
     | '/contact'
     | '/projects'
     | '/skills'
-    | '/admin/achievements'
-    | '/admin/certificates'
-    | '/admin/education'
-    | '/admin/messages'
-    | '/admin/profile'
-    | '/admin/projects'
-    | '/admin/settings'
-    | '/admin/skills'
-    | '/admin/login'
-    | '/admin/'
+    | '/api/contact'
+    | '/api/ai/chat'
+    | '/api/ai/conversations'
+    | '/api/ai/session'
+    | '/api/ai/conversations/$conversationId'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
     | '/about'
-    | '/achievements'
+    | '/ai'
     | '/certificates'
     | '/contact'
     | '/projects'
     | '/skills'
-    | '/admin/achievements'
-    | '/admin/certificates'
-    | '/admin/education'
-    | '/admin/messages'
-    | '/admin/profile'
-    | '/admin/projects'
-    | '/admin/settings'
-    | '/admin/skills'
-    | '/admin/login'
-    | '/admin'
+    | '/api/contact'
+    | '/api/ai/chat'
+    | '/api/ai/conversations'
+    | '/api/ai/session'
+    | '/api/ai/conversations/$conversationId'
   id:
     | '__root__'
     | '/'
     | '/about'
-    | '/achievements'
-    | '/admin'
+    | '/ai'
     | '/certificates'
     | '/contact'
     | '/projects'
     | '/skills'
-    | '/admin/achievements'
-    | '/admin/certificates'
-    | '/admin/education'
-    | '/admin/messages'
-    | '/admin/profile'
-    | '/admin/projects'
-    | '/admin/settings'
-    | '/admin/skills'
-    | '/admin_/login'
-    | '/admin/'
+    | '/api/contact'
+    | '/api/ai/chat'
+    | '/api/ai/conversations'
+    | '/api/ai/session'
+    | '/api/ai/conversations/$conversationId'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AboutRoute: typeof AboutRoute
-  AchievementsRoute: typeof AchievementsRoute
-  AdminRoute: typeof AdminRouteWithChildren
+  AiRoute: typeof AiRoute
   CertificatesRoute: typeof CertificatesRoute
   ContactRoute: typeof ContactRoute
   ProjectsRoute: typeof ProjectsRoute
   SkillsRoute: typeof SkillsRoute
-  AdminLoginRoute: typeof AdminLoginRoute
+  ApiContactRoute: typeof ApiContactRoute
+  ApiAiChatRoute: typeof ApiAiChatRoute
+  ApiAiConversationsRoute: typeof ApiAiConversationsRouteWithChildren
+  ApiAiSessionRoute: typeof ApiAiSessionRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -269,18 +202,11 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AboutRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/achievements': {
-      id: '/achievements'
-      path: '/achievements'
-      fullPath: '/achievements'
-      preLoaderRoute: typeof AchievementsRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/admin': {
-      id: '/admin'
-      path: '/admin'
-      fullPath: '/admin'
-      preLoaderRoute: typeof AdminRouteImport
+    '/ai': {
+      id: '/ai'
+      path: '/ai'
+      fullPath: '/ai'
+      preLoaderRoute: typeof AiRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/certificates': {
@@ -311,115 +237,67 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof SkillsRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/admin/': {
-      id: '/admin/'
-      path: '/'
-      fullPath: '/admin/'
-      preLoaderRoute: typeof AdminIndexRouteImport
-      parentRoute: typeof AdminRoute
-    }
-    '/admin/achievements': {
-      id: '/admin/achievements'
-      path: '/achievements'
-      fullPath: '/admin/achievements'
-      preLoaderRoute: typeof AdminAchievementsRouteImport
-      parentRoute: typeof AdminRoute
-    }
-    '/admin/certificates': {
-      id: '/admin/certificates'
-      path: '/certificates'
-      fullPath: '/admin/certificates'
-      preLoaderRoute: typeof AdminCertificatesRouteImport
-      parentRoute: typeof AdminRoute
-    }
-    '/admin/education': {
-      id: '/admin/education'
-      path: '/education'
-      fullPath: '/admin/education'
-      preLoaderRoute: typeof AdminEducationRouteImport
-      parentRoute: typeof AdminRoute
-    }
-    '/admin/messages': {
-      id: '/admin/messages'
-      path: '/messages'
-      fullPath: '/admin/messages'
-      preLoaderRoute: typeof AdminMessagesRouteImport
-      parentRoute: typeof AdminRoute
-    }
-    '/admin/profile': {
-      id: '/admin/profile'
-      path: '/profile'
-      fullPath: '/admin/profile'
-      preLoaderRoute: typeof AdminProfileRouteImport
-      parentRoute: typeof AdminRoute
-    }
-    '/admin/projects': {
-      id: '/admin/projects'
-      path: '/projects'
-      fullPath: '/admin/projects'
-      preLoaderRoute: typeof AdminProjectsRouteImport
-      parentRoute: typeof AdminRoute
-    }
-    '/admin/settings': {
-      id: '/admin/settings'
-      path: '/settings'
-      fullPath: '/admin/settings'
-      preLoaderRoute: typeof AdminSettingsRouteImport
-      parentRoute: typeof AdminRoute
-    }
-    '/admin/skills': {
-      id: '/admin/skills'
-      path: '/skills'
-      fullPath: '/admin/skills'
-      preLoaderRoute: typeof AdminSkillsRouteImport
-      parentRoute: typeof AdminRoute
-    }
-    '/admin_/login': {
-      id: '/admin_/login'
-      path: '/admin/login'
-      fullPath: '/admin/login'
-      preLoaderRoute: typeof AdminLoginRouteImport
+    '/api/contact': {
+      id: '/api/contact'
+      path: '/api/contact'
+      fullPath: '/api/contact'
+      preLoaderRoute: typeof ApiContactRouteImport
       parentRoute: typeof rootRouteImport
+    }
+    '/api/ai/chat': {
+      id: '/api/ai/chat'
+      path: '/api/ai/chat'
+      fullPath: '/api/ai/chat'
+      preLoaderRoute: typeof ApiAiChatRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/ai/conversations': {
+      id: '/api/ai/conversations'
+      path: '/api/ai/conversations'
+      fullPath: '/api/ai/conversations'
+      preLoaderRoute: typeof ApiAiConversationsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/ai/session': {
+      id: '/api/ai/session'
+      path: '/api/ai/session'
+      fullPath: '/api/ai/session'
+      preLoaderRoute: typeof ApiAiSessionRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/ai/conversations/$conversationId': {
+      id: '/api/ai/conversations/$conversationId'
+      path: '/$conversationId'
+      fullPath: '/api/ai/conversations/$conversationId'
+      preLoaderRoute: typeof ApiAiConversationsConversationIdRouteImport
+      parentRoute: typeof ApiAiConversationsRoute
     }
   }
 }
 
-interface AdminRouteChildren {
-  AdminAchievementsRoute: typeof AdminAchievementsRoute
-  AdminCertificatesRoute: typeof AdminCertificatesRoute
-  AdminEducationRoute: typeof AdminEducationRoute
-  AdminMessagesRoute: typeof AdminMessagesRoute
-  AdminProfileRoute: typeof AdminProfileRoute
-  AdminProjectsRoute: typeof AdminProjectsRoute
-  AdminSettingsRoute: typeof AdminSettingsRoute
-  AdminSkillsRoute: typeof AdminSkillsRoute
-  AdminIndexRoute: typeof AdminIndexRoute
+interface ApiAiConversationsRouteChildren {
+  ApiAiConversationsConversationIdRoute: typeof ApiAiConversationsConversationIdRoute
 }
 
-const AdminRouteChildren: AdminRouteChildren = {
-  AdminAchievementsRoute: AdminAchievementsRoute,
-  AdminCertificatesRoute: AdminCertificatesRoute,
-  AdminEducationRoute: AdminEducationRoute,
-  AdminMessagesRoute: AdminMessagesRoute,
-  AdminProfileRoute: AdminProfileRoute,
-  AdminProjectsRoute: AdminProjectsRoute,
-  AdminSettingsRoute: AdminSettingsRoute,
-  AdminSkillsRoute: AdminSkillsRoute,
-  AdminIndexRoute: AdminIndexRoute,
+const ApiAiConversationsRouteChildren: ApiAiConversationsRouteChildren = {
+  ApiAiConversationsConversationIdRoute: ApiAiConversationsConversationIdRoute,
 }
 
-const AdminRouteWithChildren = AdminRoute._addFileChildren(AdminRouteChildren)
+const ApiAiConversationsRouteWithChildren =
+  ApiAiConversationsRoute._addFileChildren(ApiAiConversationsRouteChildren)
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AboutRoute: AboutRoute,
-  AchievementsRoute: AchievementsRoute,
-  AdminRoute: AdminRouteWithChildren,
+  AiRoute: AiRoute,
   CertificatesRoute: CertificatesRoute,
   ContactRoute: ContactRoute,
   ProjectsRoute: ProjectsRoute,
   SkillsRoute: SkillsRoute,
-  AdminLoginRoute: AdminLoginRoute,
+  ApiContactRoute: ApiContactRoute,
+  ApiAiChatRoute: ApiAiChatRoute,
+  ApiAiConversationsRoute: ApiAiConversationsRouteWithChildren,
+  ApiAiSessionRoute: ApiAiSessionRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
