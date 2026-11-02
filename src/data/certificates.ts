@@ -19,4 +19,13 @@ export const certificates: Certificate[] = [
     documentType: "image",
     status: "sample",
   },
+    {
+    id: "cert-3",
+    title: "YOUR EXACT CERTIFICATE TITLE",
+    issuer: "Cisco Networking Academy",
+    date: "YOUR CERTIFICATE DATE",
+    imageUrl: "/certificates/cisco-networking-initial.jpg",
+    documentType: "image",
+    status: "sample",
+  },
 ];
