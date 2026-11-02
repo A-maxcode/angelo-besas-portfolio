@@ -1,45 +1,113 @@
-# Angelo Besas — Portfolio
+Angelo Personal Portfolio
 
-Personal portfolio for **Angelo Besas** (Young IT · BS Information Technology, Holy Name University), with an admin UI prototype for a future CMS.
+A responsive personal portfolio showcasing my background as a Bachelor of Science in Information Technology student, my projects, certificates, technical interests, and ongoing learning in web development.
 
-## Milestone status
+Site URL
 
-**Milestone 1 — frontend only.**
+"https://angelo-besas-portfolio.vercel.app"
 
-- ✅ Public pages: `/`, `/about`, `/achievements`, `/certificates`, `/projects`, `/skills`, `/contact`
-- ✅ Admin UI shell: `/admin/login`, `/admin`, `/admin/profile`, `/admin/achievements`, `/admin/certificates`, `/admin/projects`, `/admin/skills`, `/admin/education`, `/admin/messages`, `/admin/settings`
-- ❌ **Not implemented yet:** database schema, authentication, file storage, Row Level Security, real CMS CRUD, and contact message delivery.
+Overview
 
-> The admin area is a **UI prototype**. It has no sign-in and **no access control** — anyone who knows the URL can open it. It does not save anything: add/edit/delete only changes in-memory state and resets on reload. Hiding links in the UI is not security; real protection arrives with the backend milestone.
+This portfolio presents my:
 
-## Editing content
+- Profile and educational background
+- Web development projects
+- Certificates and training
+- Technical skills and interests
+- Contact information
+- A-Max AI assistant
 
-All content lives in centralized mock data files:
+Current focus: Web Development
 
-| File | Content |
-| --- | --- |
-| `src/data/profile.ts` | Name, headline, course, school, intro, education, interests |
-| `src/data/projects.ts` | Projects (sample/demo, clearly labeled) |
-| `src/data/achievements.ts` | Achievements (placeholders) |
-| `src/data/certificates.ts` | Certificates (placeholders) |
-| `src/data/skills.ts` | Grouped skills (no proficiency scores) |
-| `src/data/admin.ts` | Sample admin inbox + activity |
+Projects
 
-Each entry has a `status` of `"placeholder"` or `"sample"`, which renders a visible badge. Replace entries with verified content and remove the status badge when real data is in place.
+The portfolio currently includes:
+Project        | Technologies 
+MASH Social    | PHP, MySQL, JavaScript, CSS
+Date Schedule  | PHP, MySQL, JavaScript, CSS
 
-## Local development
+Current certificates:
 
-```bash
+1. Network Addressing and Basic Troubleshooting — Cisco Networking Academy
+2. Networking Devices and Basic Configuration — Cisco Networking Academy
+3. Networking Devices and Initial Configuration — Cisco Networking Academy
+
+Technology Stack
+
+Frontend
+
+- React 19
+- TypeScript
+- TanStack Start
+- TanStack Router
+- Vite
+- Tailwind CSS v4
+- Radix UI
+- Lucide React
+- React Hook Form
+- Zod
+
+Backend and Services
+
+- Neon Serverless PostgreSQL
+- OpenAI Responses API
+- Resend
+
+Development
+
+- GitHub  — source code repository
+- Vercel  — deployment platform
+- Lovable — portfolio project workspace
+  
+Development
+
+The project uses Bun scripts.
+
+Install dependencies
+
 bun install
-bun run dev      # start the dev server
-bun run test     # run tests
-bun run build    # production build
-```
 
-## Tech
+Start development server
 
-React 19 + TypeScript, TanStack Start/Router, Tailwind CSS v4, shadcn/ui, react-hook-form + zod.
+bun run dev
 
-## Repository
+Production build
 
-Kept **private** during development. No analytics, payments, or third-party tracking are included.
+bun run build
+
+Development-mode build
+
+bun run build:dev
+
+Preview production build
+
+bun run preview
+
+Run lint
+
+bun run lint
+
+Run tests
+
+bun run test
+
+Run tests in watch mode
+
+bun run test:watch
+
+Format source files
+
+bun run format
+
+Future Improvements
+
+- Add a proper featured-certificate selection mechanism.
+- Improve certificate management and document organization.
+- Align the floating chatbot component with the implemented AI API contract.
+- Improve AI conversation management and error handling.
+- Expand automated tests.
+- Continue improving accessibility, performance, and responsive behavior.
+
+License
+
+No explicit open-source license is currently specified. All rights and ownership remain with the repository owner unless a license is added.
