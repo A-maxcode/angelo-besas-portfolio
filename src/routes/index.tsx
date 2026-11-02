@@ -63,9 +63,9 @@ function HomePage() {
     }
   />
   <div className="grid gap-6 md:grid-cols-2">
-    {certificates.map((certificate) => (
-      <CertificateCard key={certificate.id} item={certificate} />
-    ))}
+    {featuredCertificates.map((certificate) => (
+  <CertificateCard key={certificate.id} item={certificate} />
+))}
   </div>
 </Section>
 
