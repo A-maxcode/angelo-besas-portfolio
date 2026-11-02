@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, type FormEvent } from "react";
 
 interface ChatInputProps {
   onSend: (message: string) => void;
@@ -11,7 +11,7 @@ export function ChatInput({
 }: ChatInputProps) {
   const [value, setValue] = useState("");
 
-  function submitMessage(event: React.FormEvent<HTMLFormElement>) {
+  function submitMessage(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
 
     const message = value.trim();
