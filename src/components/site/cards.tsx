@@ -1,3 +1,10 @@
+import { useState } from "react";
+import {
+  Dialog,
+  DialogContent,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog";
 import { Award, Calendar, ExternalLink, FileText, ImageIcon } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import type { Achievement, Certificate, Project, SkillGroup } from "@/data/types";
