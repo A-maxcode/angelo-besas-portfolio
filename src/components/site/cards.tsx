@@ -35,16 +35,41 @@ export function AchievementCard({ item }: { item: Achievement }) {
 }
 
 export function CertificateCard({ item }: { item: Certificate }) {
+  const [previewOpen, setPreviewOpen] = useState(false);
+
   return (
     <article className="card-surface card-interactive flex h-full flex-col overflow-hidden">
       {item.imageUrl && (
-        <div className="aspect-[4/3] overflow-hidden border-b bg-muted">
-          <img
-            src={item.imageUrl}
-            alt={item.title}
-            className="h-full w-full object-cover object-top transition-transform duration-300 hover:scale-105"
-          />
-        </div>
+        <Dialog open={previewOpen} onOpenChange={setPreviewOpen}>
+          <DialogTrigger asChild>
+            <button
+              type="button"
+              aria-label={`View full-size certificate: ${item.title}`}
+              className="block aspect-[4/3] w-full cursor-zoom-in overflow-hidden border-b bg-muted"
+            >
+              <img
+                src={item.imageUrl}
+                alt={item.title}
+                className="h-full w-full object-cover object-top transition-transform duration-300 hover:scale-105"
+              />
+            </button>
+          </DialogTrigger>
+
+          <DialogContent
+            onClick={() => setPreviewOpen(false)}
+            className="w-[calc(100vw-1rem)] max-w-5xl max-h-[95vh] cursor-zoom-out overflow-y-auto p-3 sm:p-4 [&>button]:hidden"
+          >
+            <DialogTitle className="sr-only">
+              {item.title}
+            </DialogTitle>
+
+            <img
+              src={item.imageUrl}
+              alt={item.title}
+              className="mx-auto max-h-[calc(95vh-2rem)] w-full object-contain"
+            />
+          </DialogContent>
+        </Dialog>
       )}
 
       <div className="flex flex-1 flex-col p-5">
